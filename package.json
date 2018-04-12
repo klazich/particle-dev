@@ -6,5 +6,8 @@
   "license": "MIT",
   "dependencies": {
     "particle-api-js": "^7.2.0"
+  },
+  "devDependencies": {
+    "dotenv": "^5.0.1"
   }
 }
