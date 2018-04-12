@@ -1,0 +1,10 @@
+{
+  "name": "particle-dev",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Kevin Lazich <dev@kevinlazich.com>",
+  "license": "MIT",
+  "dependencies": {
+    "particle-api-js": "^7.2.0"
+  }
+}
