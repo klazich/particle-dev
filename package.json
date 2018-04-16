@@ -16,6 +16,8 @@
   "scripts": {
     "build": "babel src -d lib",
     "prettier":
-      "prettier --single-quote --trailing-comma es5 --write ./**/*.{js,md,css,json}"
+      "prettier --single-quote --trailing-comma es5 --write ./**/*.{js,md,css,json}",
+    "start": "node -r dotenv/config lib/index.js",
+    "prestart": "yarn build"
   }
 }
