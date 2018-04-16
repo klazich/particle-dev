@@ -9,7 +9,7 @@ const particle = new Particle();
 
 const loginOptions = {
   username: process.env.LOGIN,
-  password: process.env.PASSWORD,
+  password: process.env.PASSWD,
 };
 
 console.log(loginOptions);
