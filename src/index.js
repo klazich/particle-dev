@@ -12,6 +12,14 @@ const loginOptions = {
   password: process.env.PASSWD,
 };
 
+// photon mac address: 6c:0b:84:c8:65:20
+
+// TODO:
+// https://community.particle.io/t/photon-setup-flashing-cyan-with-a-quick-red-burst-now-orange-burst-solved/12118/23
+// server: https://s3.amazonaws.com/spark-website/cloud_public.der
+// pre-release: https://github.com/particle-iot/firmware/releases
+
+
 console.log(loginOptions);
 
 particle
