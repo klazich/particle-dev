@@ -5,6 +5,7 @@
   "author": "Kevin Lazich <dev@kevinlazich.com>",
   "license": "MIT",
   "dependencies": {
+    "node-red": "^0.18.4",
     "particle-api-js": "^7.2.0",
     "particle-cli": "^1.29.0"
   },
@@ -16,8 +17,7 @@
   },
   "scripts": {
     "build": "babel src -d lib",
-    "prettier":
-      "prettier --single-quote --trailing-comma es5 --write ./**/*.{js,md,css,json}",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write ./**/*.{js,md,css,json}",
     "start": "node -r dotenv/config lib/index.js",
     "prestart": "yarn build"
   }
