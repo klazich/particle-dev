@@ -12,21 +12,26 @@ const loginOptions = {
   password: process.env.PASSWD,
 };
 
-// photon mac address: 6c:0b:84:c8:65:20
+// Particle Photon
+// device id: 41002b000b51353335323535
 
-// TODO:
-// https://community.particle.io/t/photon-setup-flashing-cyan-with-a-quick-red-burst-now-orange-burst-solved/12118/23
-// server: https://s3.amazonaws.com/spark-website/cloud_public.der
-// pre-release: https://github.com/particle-iot/firmware/releases
+// MCP23008_SCI07R1G5L2
+// - https://store.ncd.io/product/iot-1-channel-spdt-relay-shield-7-gpio/
+// - https://github.com/ncd-io/MCP2300
 
+// SHT25
+// - https://store.ncd.io/product/sht25-humidity-and-temperature-sensor-%C2%B11-8rh-%C2%B10-2c-i2c-mini-module/
+// - https://github.com/ControlEverythingCommunity/SHT25
 
-console.log(loginOptions);
-
-particle
+const particle
   .login(loginOptions)
+  .then(data => {
+    return data
+  })
   .then(data => {
     console.log('API call completed, data:', data);
   })
   .catch(err => {
     console.log('API call failed with:', err);
   });
+
