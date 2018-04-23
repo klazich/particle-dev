@@ -5,4 +5,5 @@ lib
 
 .idea
 .vscode
+gcp_private_key.json
 
