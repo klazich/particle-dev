@@ -1,40 +1,53 @@
+// Imports the Google Cloud client library
 import PubSub from '@google-cloud/pubsub';
 
-const pubsub = new PubSub();
+// Your Google Cloud Platform project ID
+const projectId = process.env.PROJECT_ID;
+// Creates the PubSub client
+const pubsub = new PubSub({ projectId });
 
-// subscription names
-const humidity = 'humidity';
-const temperature = 'temperature';
+// PubSub names
+const topicName = 'sht25';
+const subscriptionName = 'sht25';
 
-export default function(subscriptionName) {
-  subscription = pubsub.subscription(subscriptionName);
-}
+// References an existing subscription
+const topic = pubsub.topic(topicName);
+const subscription = topic.subscription(subscriptionName);
 
-const subHumidity = pubsub.subscription(humidity);
-const subTemperature = pubsub.subscription(temperature);
+// Register an error handler.
+subscription.on('error', err => {
+  console.log(err);
+});
 
-// handle message logging
-let messageCount = 0;
-const messageLogger = message => {
-  console.log(`Subscription: ${message.attributes.event}`);
-  console.log(`Received message ${message.id}:`);
-  console.log(`\tData: ${message.data}`);
-  console.log(`\tAttributes: ${message.attributes.keys}`);
-  messageCount += 1;
-};
+// Register a listener for `message` events.
+function onMessage(message) {
+  /**
+   * message.id ........... ID of the message.
+   * message.ackId ........ ID used to acknowledge the message received.
+   * message.data ......... Contents of the message.
+   * message.attributes ... Attributes of the message.
+   */
 
-// Create an event handler to handle messages
-const messageHandler = message => {
-  // "Ack" (acknowledge receipt of) the message
+  let dataBuf = Buffer.from(message.data);
+  let data = {
+    id: message.id,
+    at: message.attributes.published_at,
+    ...JSON.parse(dataBuf.toString('utf8')),
+  };
+
+  console.log(data);
+
+  console.log(`-`.repeat(80));
+
+  // do stuff with message
+
+  // Ack the message:
   message.ack();
-};
-
-// Listen for new messages until timeout is hit
-subHumidity.on(`message`, messageHandler);
-subTemperature.on(`message`, messageHandler);
+}
+subscription.on('message', onMessage);
+console.log('listener added');
 
 setTimeout(() => {
-  subHumidity.removeListener('message', messageHandler);
-  subTemperature.removeListener('message', messageHandler);
-  console.log(`${messageCount} message(s) received.`);
-}, timeout * 1000);
+  subscription.removeListener('message', onMessage);
+  console.log('listener removed');
+}, 30000);
