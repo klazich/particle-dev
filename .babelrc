@@ -1,6 +1,5 @@
 {
   "presets": ["env"],
-  "ignore": [
-    "src/*.dep*"
-  ]
+  "plugins":["transform-object-rest-spread"],
+  "ignore": ["src/*.dep*"]
 }
