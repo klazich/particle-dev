@@ -21,12 +21,10 @@ const task = {
   },
 };
 
-function makeKey(data)
+function makeKey(data) {}
 
 function makeEntity(data) {
-  return {
-
-  }
+  return {};
 }
 
 // Saves the entity

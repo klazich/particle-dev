@@ -1,10 +1,11 @@
-// Imports the Google Cloud client library
 import PubSub from '@google-cloud/pubsub';
 
 // Your Google Cloud Platform project ID
 const projectId = process.env.PROJECT_ID;
 // Creates the PubSub client
-const pubsub = new PubSub({ projectId });
+const pubsub = new PubSub({
+  projectId,
+});
 
 // PubSub names
 const topicName = 'sht25';
@@ -13,6 +14,8 @@ const subscriptionName = 'sht25';
 // References an existing subscription
 const topic = pubsub.topic(topicName);
 const subscription = topic.subscription(subscriptionName);
+
+let count = 0;
 
 // Register an error handler.
 subscription.on('error', err => {
@@ -35,19 +38,20 @@ function onMessage(message) {
     ...JSON.parse(dataBuf.toString('utf8')),
   };
 
-  console.log(data);
-
-  console.log(`-`.repeat(80));
+  console.dir(data);
+  console.log('\n');
 
   // do stuff with message
 
   // Ack the message:
   message.ack();
+
+  count += 1;
+
+  if (count > 10) {
+    subscription.removeListener('message', onMessage);
+    console.log('------>    listener removed');
+  }
 }
 subscription.on('message', onMessage);
-console.log('listener added');
-
-setTimeout(() => {
-  subscription.removeListener('message', onMessage);
-  console.log('listener removed');
-}, 30000);
+console.log('------>    listener added');

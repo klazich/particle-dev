@@ -3,7 +3,8 @@ node_modules
 lib
 *.log
 
+.tern*
 .idea
 .vscode
 gcp_private_key.json
-client-secret.json
+motor-controller-01-0468075f1c61.json
