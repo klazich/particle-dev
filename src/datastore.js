@@ -1,38 +1,43 @@
 import Datastore from '@google-cloud/datastore';
 
-// Your Google Cloud Platform project ID
 const projectId = process.env.PROJECT_ID;
-
-// Creates the Datastore client
 const datastore = new Datastore({ projectId });
 
-// The kind for the new entity
-const kind = 'HT_Reading';
-// The name/ID for the new entity
-const name = 'id';
-// The Cloud Datastore key for the new entity
-const taskKey = datastore.key([kind, name]);
-
-// Prepares the new entity
-const task = {
-  key: taskKey,
-  data: {
-    description: 'Buy milk',
-  },
-};
-
-function makeKey(data) {}
-
-function makeEntity(data) {
-  return {};
+export default function addReading(subObj) {
+  try {
+    saveEntity(makeEntity(subObj), datastore);
+  } catch (e) {
+    console.error(e);
+    return -1;
+  }
+  return 0;
 }
 
-// Saves the entity
-datastore
-  .save(task)
-  .then(() => {
-    console.log(`Saved ${task.key.name}: ${task.data.description}`);
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
+export function makeEntity(subObj) {
+  // Prepares the new entity
+  const { attributes, humidity, temperature } = subObj;
+
+  const key = datastore.key([
+    'SHT25',
+    attributes.device_id,
+    'Reading',
+    attributes.published_at,
+  ]);
+  const data = { humidity, temperature, attributes };
+
+  return {
+    key,
+    data,
+  };
+}
+
+export function saveEntity(entity, datastoreInst) {
+  datastoreInst
+    .save(entity)
+    .then(() => {
+      console.log(`... an entity was created successfully`);
+    })
+    .catch(err => {
+      console.error('ERROR:', err);
+    });
+}

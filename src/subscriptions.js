@@ -1,11 +1,9 @@
 import PubSub from '@google-cloud/pubsub';
 
-// Your Google Cloud Platform project ID
+import addReading from './datastore.js';
+
 const projectId = process.env.PROJECT_ID;
-// Creates the PubSub client
-const pubsub = new PubSub({
-  projectId,
-});
+const pubsub = new PubSub({ projectId });
 
 // PubSub names
 const topicName = 'sht25';
@@ -17,10 +15,14 @@ const subscription = topic.subscription(subscriptionName);
 
 let count = 0;
 
-// Register an error handler.
+// Register an error handler
 subscription.on('error', err => {
   console.log(err);
 });
+
+// Register the subscription handler
+subscription.on('message', onMessage);
+console.log('==> listener added');
 
 // Register a listener for `message` events.
 function onMessage(message) {
@@ -31,27 +33,28 @@ function onMessage(message) {
    * message.attributes ... Attributes of the message.
    */
 
-  let dataBuf = Buffer.from(message.data);
-  let data = {
-    id: message.id,
-    at: message.attributes.published_at,
-    ...JSON.parse(dataBuf.toString('utf8')),
-  };
+  let data;
 
-  console.dir(data);
-  console.log('\n');
+  try {
+    let dataBuf = Buffer.from(message.data);
+    data = {
+      attributes: message.attributes,
+      ...JSON.parse(dataBuf.toString('utf8')),
+    };
+  } catch (error) {
+    data = error;
+  }
 
-  // do stuff with message
+  console.log('... a subscription was received');
 
-  // Ack the message:
-  message.ack();
+  addReading(data);
+
+  message.ack(); // Ack the message
 
   count += 1;
 
   if (count > 10) {
     subscription.removeListener('message', onMessage);
-    console.log('------>    listener removed');
+    console.log('==> listener removed');
   }
 }
-subscription.on('message', onMessage);
-console.log('------>    listener added');
