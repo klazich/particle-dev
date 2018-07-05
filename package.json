@@ -21,7 +21,7 @@
   "scripts": {
     "build": "babel src -d lib",
     "prettier":
-      "prettier --single-quote --trailing-comma es5 --write ./**/*.{js,md,css,json}",
+      "prettier --single-quote --trailing-comma es5 --no-semi --write ./**/*.{js,md,css,json}",
     "start": "node -r dotenv/config lib/subscriptions.js",
     "prestart": "yarn build"
   }
