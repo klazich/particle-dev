@@ -22,25 +22,25 @@ exports.subscribe = (event, callback) => {
       {
         type: 'maximum current',
         unit: 'Ampere',
-        symbol: 'I',
+        symbol: ['I'],
         value: parseFloat(data[0]),
       },
       {
         type: 'average current',
         unit: 'Ampere',
-        symbol: 'I',
+        symbol: ['I'],
         value: parseFloat(data[1]),
       },
       {
         type: 'average voltage',
         unit: 'Volt',
-        symbol: 'V',
+        symbol: ['V'],
         value: parseFloat(data[2]),
       },
       {
         type: 'average power',
         unit: 'Watt',
-        symbol: 'W',
+        symbol: ['W'],
       },
     ],
   }

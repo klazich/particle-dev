@@ -23,17 +23,20 @@ exports.subscribe = (event, callback) => {
     data: [
       {
         type: 'humidity',
-        unit: 'RH',
+        uom: 'Relative Humidity',
+        symbol: ['RH', 'ϕ'],
         value: data.humidity,
       },
       {
         type: 'temperature',
-        unit: 'C',
+        uom: 'Celsius',
+        symbol: ['°C'],
         value: data.temperature,
       },
       {
         type: 'temperature',
-        unit: 'F',
+        uom: 'Fahrenheit',
+        symbol: ['°F'],
         value: celsiusToFahrenheit(data.temperature),
       },
     ],
