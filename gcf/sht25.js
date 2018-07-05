@@ -24,7 +24,7 @@ exports.subscribe = (event, callback) => {
       {
         type: 'humidity',
         uom: 'Relative Humidity',
-        symbol: ['RH', 'ϕ'],
+        symbol: ['%RH', 'ϕ'],
         value: data.humidity,
       },
       {

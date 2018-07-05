@@ -29,7 +29,7 @@ void loop() {
 
     snprintf(buf, sizeof(buf), "humidity, %.10f \n temperature, %.10f", humidity, temperature);
 
-    Particle.publish("data", buf, 60, PRIVATE);
+    Particle.publish("reading", buf, 60, PRIVATE);
 
     mark = millis();
   }

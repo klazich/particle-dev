@@ -21,37 +21,44 @@ exports.subscribe = (event, callback) => {
     data: [
       {
         type: 'maximum current',
-        unit: 'Ampere',
+        uom: 'Ampere',
         symbol: ['I'],
         value: parseFloat(data[0]),
       },
       {
         type: 'average current',
-        unit: 'Ampere',
+        uom: 'Ampere',
         symbol: ['I'],
         value: parseFloat(data[1]),
       },
       {
         type: 'average voltage',
-        unit: 'Volt',
+        uom: 'Volt',
         symbol: ['V'],
         value: parseFloat(data[2]),
       },
       {
         type: 'average power',
-        unit: 'Watt',
+        uom: 'Watt',
         symbol: ['W'],
+        value: parseFloat(data[3]),
+      },
+      {
+        type: 'cycle duration',
+        uom: 'Millisecond',
+        symbol: 'ms',
+        value: Math.round(parseFloat(data[4]) * 1000),
+      },
+      {
+        type: 'count of cycles',
+        value: parseInt(data[5]),
       },
     ],
   }
 
-  console.log(data)
+  console.log(JSON.stringify(res))
 
   callback()
-}
-
-function prep(data) {
-  const keys = [maxExtend, avgCurrent, avgVoltage, avgWattage, duration, cycles]
 }
 
 // "0.00 Max Amps | -2.19 Avg Amps| 0.66 Avg Voltage| -1.44 Avg Wattage| Cycle Duration: 6.08 seconds| Cycles: 2705"
