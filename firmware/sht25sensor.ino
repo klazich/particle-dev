@@ -27,7 +27,7 @@ void loop() {
     humidity = sensor.readHumidity();
     temperature = sensor.readTemp();
 
-    snprintf(buf, sizeof(buf), "{\"humidity\":%.10f,\"temperature\":%.10f}", humidity, temperature);
+    snprintf(buf, sizeof(buf), "humidity, %.10f \n temperature, %.10f", humidity, temperature);
 
     Particle.publish("data", buf, 60, PRIVATE);
 
