@@ -1,0 +1,6 @@
+DUTY CYCLE - is the ratio of time to off time, usually expressed as as
+             percentage.
+
+                  y     "D" duty cycle
+            D = ---    "y" total amount of time to complete one cycle
+                  x     "x" amount of time the component is running

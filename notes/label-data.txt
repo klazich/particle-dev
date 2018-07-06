@@ -1,0 +1,19 @@
+DL5/DL6
+--------------------
+Max Load    : 800 N
+Power Rate  : 18 V / 10 Amp
+Duty Cycle  : 10%, Max. 2 min. / 18 min.
+- Ambient temperature: +10° to +40 °C
+- Duty cycle: 10 % ~ 2 minutes of continuous use at full load,
+  followed by 18 minutes of pause
+- Max. thrust 1200 N per column
+- Max. speed 38 mm/s unloaded
+
+CBD6
+--------------------
+U In        : 120 V ~, 60 Hz
+P In        : 375 W
+U Out       : 12-24 V
+Op.         : 10%, Max. 2 min. /18 min.
+- Duty cycle max. 10 % ~ 6 min. per hour or 2 min. of
+  continuous use at full load
