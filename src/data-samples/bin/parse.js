@@ -20,12 +20,12 @@ let a = []
 
 d.forEach(l => {
   while (m.isBefore(l[0])) {
-    a = [...a, {dt: m.clone()}]
+    a = [...a, { dt: m.clone() }]
     m.add(1, 'h')
   }
-  a = [...a, {dt: l[0], T: l[1], RH: l[2]}]
+  a = [...a, { dt: l[0], T: l[1], RH: l[2] }]
   m.add(1, 'h')
 })
 
 const outPath = path.resolve(__dirname, 'T-RH.txt')
-fs.writeFileSync(outPath, JSON.stringify(a), {encoding: 'utf8'})
+fs.writeFileSync(outPath, JSON.stringify(a), { encoding: 'utf8' })
